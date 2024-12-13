@@ -1,0 +1,5 @@
+<ul class="list-group list-group-flush" id="recomendaciones">
+    @for (recomendacion of popularSearches; track $index) {
+        <a class="list-group-item list-group-item-action recomendation" (click)="onPassRecomendacion(recomendacion)">{{ recomendacion }}</a>
+    }
+</ul>

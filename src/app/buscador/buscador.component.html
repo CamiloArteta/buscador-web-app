@@ -1,0 +1,276 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="search-bar-form mb-1">
+      <img
+        src="https://cdn.shopify.com/s/files/1/0519/2695/8235/files/favicon-jamar.svg?v=1703005873"
+        class="img-fluid rounded-top mb-2"
+        alt="Jamar logo"
+        id="logo"
+      />
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <div class="search-container">
+          <input
+          type="text"
+          class="form-control"
+          name="search"
+          id="search"
+          [(ngModel)]="this.searchForm.value.searchTerm"
+          placeholder="Ingresa tu búsqueda aquí"
+          formControlName="searchTerm"
+          (input)="onSearchChange()"
+          />
+          <ion-icon name="search" class="search-icon"></ion-icon>
+          <ion-icon name="close" class="delete-icon" (click)="deleteSearch()"></ion-icon>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-md-3 filtros-container">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="text-start">
+        @if (searchForm.value.searchTerm?.length !== 0) {
+        <button
+          class="btn btn-dark mb-2"
+          (click)="deleteFiltros()"
+          [disabled]="activeFiltro()"
+          id="boton"
+        >
+          Borrar Filtros
+        </button>
+        <h5 style="cursor: pointer;" (click)="toggleMostrarMasColor()">Color   <i class="bi {{ mostrarMasColor ? 'bi-chevron-up ms-2' : 'bi-chevron-down ms-2' }}"></i></h5>
+        @if (mostrarMasColor) {
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="amarillo"
+              id="Amarillo"
+              (change)="onCheckChange('color', $event)"
+              [checked]="selectedColores.includes('amarillo')"
+            />
+            <label class="form-check-label" for="Amarillo">Amarillo</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="azul"
+              id="Azul"
+              [checked]="selectedColores.includes('azul')"
+              (change)="onCheckChange('color', $event)"
+            />
+            <label class="form-check-label" for="Azul">Azul</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="beige"
+              id="Beige"
+              [checked]="selectedColores.includes('beige')"
+              (change)="onCheckChange('color', $event)"
+            />
+            <label class="form-check-label" for="Beige">Beige</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="taupe"
+              id="Taupe"
+              [checked]="selectedColores.includes('taupe')"
+              (change)="onCheckChange('color', $event)"
+            />
+            <label class="form-check-label" for="Taupe">Taupe</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="natural"
+              id="Natural"
+              [checked]="selectedColores.includes('natural')"
+              (change)="onCheckChange('color', $event)"
+            />
+            <label class="form-check-label" for="Natural">Natural</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="otro"
+              id="otro"
+              [checked]="selectedColores.includes('otro')"
+              (change)="onCheckChange('color', $event)"
+            />
+            <label class="form-check-label" for="otro">Otro</label>
+          </div>
+        }
+        <hr />
+        <h5 style="cursor: pointer;" (click)="toggleMostrarMasCateg()">Categoria   <i class="bi {{ mostrarMasCateg ? 'bi-chevron-up ms-2' : 'bi-chevron-down ms-2' }}"></i></h5>
+        @if (mostrarMasCateg) {
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="Social"
+              id="Social"
+              [checked]="selectedCateg.includes('Social')"
+              (change)="onCheckChange('categoria', $event)"
+            />
+            <label class="form-check-label" for="Social">Social</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="Dormitorio"
+              id="Dormitorio"
+              [checked]="selectedCateg.includes('Dormitorio')"
+              (change)="onCheckChange('categoria', $event)"
+            />
+            <label class="form-check-label" for="Dormitorio">Dormitorio</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="Exterior"
+              id="Exterior"
+              [checked]="selectedCateg.includes('Exterior')"
+              (change)="onCheckChange('categoria', $event)"
+            />
+            <label class="form-check-label" for="Exterior">Exterior</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="Decoracion"
+              id="Decoracion"
+              [checked]="selectedCateg.includes('Decoracion')"
+              (change)="onCheckChange('categoria', $event)"
+            />
+            <label class="form-check-label" for="Decoracion">Decoración</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="Cocina"
+              id="Cocina"
+              [checked]="selectedCateg.includes('Cocina')"
+              (change)="onCheckChange('categoria', $event)"
+            />
+            <label class="form-check-label" for="Cocina">Cocina</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="Electro"
+              id="Electro"
+              [checked]="selectedCateg.includes('Electro')"
+              (change)="onCheckChange('categoria', $event)"
+            />
+            <label class="form-check-label" for="Electro">Electro</label>
+          </div>
+          <div class="form-check mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="Estudio"
+              id="Estudio"
+              [checked]="selectedCateg.includes('Estudio')"
+              (change)="onCheckChange('categoria', $event)"
+            />
+            <label class="form-check-label" for="Estudio">Estudio</label>
+          </div>
+        }
+        <hr />
+        <h5>Desde</h5>
+        <input
+          class="form-control"
+          type="number"
+          name="start"
+          id="start"
+          placeholder="$0"
+          formControlName="startPrecio"
+        />
+        <h5>Hasta</h5>
+        <input
+          class="form-control"
+          type="number"
+          name="end"
+          id="end"
+          placeholder="$0"
+          formControlName="endPrecio"
+        />
+        <button class="btn btn-primary mt-2" id="btn-filtro-precio" (click)="onClickPrecios($event)">
+          Filtrar por precio
+        </button>
+        <hr />
+        <h5>Orden</h5>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="order"
+            id="sortAsc"
+            [value]="'asc'"
+            formControlName="order"
+            (change)="onOrder()"
+          />
+          <label for="sortAsc" class="form-check-label">Ascendente</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="order"
+            id="sortDesc"
+            [value]="'desc'"
+            formControlName="order"
+            (change)="onOrder()"
+          />
+          <label for="sortDesc" class="form-check-label">Descendente</label>
+        </div>
+        } @else {
+        <app-recomendaciones
+          (recomendacion)="updateSearchFromRec($event)"
+        ></app-recomendaciones>
+        }
+      </form>
+    </div>
+    <div class="col-9 search-result">
+      <h6 class="result-number-title">Resultados: {{ results.length }}</h6>
+      <ion-content>
+        @if (results.length > 0) {
+        <div class="row">
+          @for (result of displayedResults; track $index) {
+          <div class="col-md-3 mb-4">
+            <div class="card" style="width: 100%">
+              <img
+                [src]="result.image ? sanitizer.bypassSecurityTrustUrl(result.image) : 'https://dynamoprojects.com/wp-content/uploads/2022/12/no-image.jpg'"
+                class="card-img-top"
+              />
+              <div class="card-body">
+                <h6 class="card-title">
+                  <a
+                    href="https://www.jamar.com/products/mesa-auxiliar-ari-natural-7018700"
+                    >{{ result.nombre }}</a
+                  >
+                </h6>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+        } @if (results.length == 0 && consulta.length > 0) {
+        <h3 class="badge text-bg-danger">No se han encontrado resultados</h3>
+        }
+        <ion-infinite-scroll #infiniteScroll (ionInfinite)="onIonInfinite($event)">
+          <ion-infinite-scroll-content loadingText="Cargando..." loadingSpinner=""></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-content>
+    </div>
+  </div>
+</div>
